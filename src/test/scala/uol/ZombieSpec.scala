@@ -6,12 +6,14 @@ import zio.test.Assertion.*
 import uol.Zombies
 
 object ZombieSpec extends DefaultRunnableSpec:
+  //bla one yak
+  //bla tow yak
 
   override def spec = suite("zombies") {
     test("z") {
       for 
         zombies <- Zombies.queueAndWork
-      yield assertTrue(zombies == "zombies in the background")
+      yield assertTrue(zombies == "zombies in the background running at you")
     }
   }
 

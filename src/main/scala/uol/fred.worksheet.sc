@@ -14,6 +14,7 @@ val prints = List(
 val printWords = ZIO.collectAll(prints).map(_.mkString(" "))
 Runtime.default.unsafeRun(printWords)
 
+// yikes
 import Cause.*
 def recoverFromSomeDefects[R, E, A](zio: ZIO[R, E, A])(
     f: Throwable => Option[A]

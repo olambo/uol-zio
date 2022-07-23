@@ -7,10 +7,8 @@ import java.io.IOError
 import java.io.IOException
 import scala.concurrent.Future
 
-import Zombies.*
-
 object PlantsAndZombies extends ZIOAppDefault:
-  private val fut = ZIO.fromFuture(Future("All Zombies dealt with!\nHere's to a future"))
+  private val fut = ZIO.fromFuture(Future("what All Zombies dealt with!\nHere's to a future"))
 
   val plants: ZIO[Has[Clock] & Has[Console], Throwable, String] =
     fut

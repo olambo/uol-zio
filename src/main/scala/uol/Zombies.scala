@@ -3,10 +3,11 @@ package uol
 import zio.*
 import zio.Console.*
 
-object Zombies:
+object Zombies: 
+
   private def work(id: String, sleeptime: Duration)(n: Int): URIO[Has[Clock] with Has[Console], Unit] =
     Console.printLine(s"hunter $id tracking zombie $n").orDie *>
-      ZIO.sleep(sleeptime) *> 
+      ZIO.sleep(sleeptime) *>
       Console.printLine(s"hunter $id eliminated zombie $n. It took $sleeptime").orDie
 
   def queueAndWork: ZIO[Has[Clock] & Has[Console], Nothing, String] =
@@ -18,4 +19,3 @@ object Zombies:
       _ <- ZIO.foreachDiscard(1 to 5)(queue.offer)
       zb <- ZIO.succeed("Zombies in the background stomping through the crop, trying to get at the camp.")
     yield zb
-  

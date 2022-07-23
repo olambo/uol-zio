@@ -1,6 +1,6 @@
 val scalaVer = "3.0.2"
 
-val zioVersion = "2.0.0-M3"
+val zioVersion = "2.0.0-M4"
 
 lazy val root = project
   .in(file("."))

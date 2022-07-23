@@ -6,9 +6,7 @@ import zio.test.Assertion.*
 import uol.Zombies
 
 object ZombieSpec extends DefaultRunnableSpec:
-  //bla one yak
-  //bla tow yak
-
+  
   override def spec = suite("zombies") {
     test("z") {
       for 
@@ -25,4 +23,5 @@ object PlantSpec extends DefaultRunnableSpec:
         plants <- PlantsAndZombies.plants
       yield assertTrue(plants == "here's to a future zombie free and plant teeming world")
     }
-  }
+  }  
+  

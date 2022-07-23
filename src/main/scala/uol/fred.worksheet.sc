@@ -4,15 +4,16 @@ import zio.*
 import zio.Console.*
 
 val prints = List(
-  ZIO.attempt("The").catchAll(_ => ZIO.Succeed("zombie")),
-  ZIO.Succeed("sexi"),
-  ZIO.Succeed("foxi"),
-  ZIO.Succeed("freedom"),
-  ZIO.Succeed("fighter"),
+  ZIO.attempt("The").catchAll(_ => ZIO.SucceedNow("zombie")),
+  ZIO.SucceedNow("sexi"),
+  ZIO.SucceedNow("foxi"),
+  ZIO.SucceedNow("freedom"),
+  ZIO.SucceedNow("fighter"),
 )
 
 val printWords = ZIO.collectAll(prints).map(_.mkString(" "))
 Runtime.default.unsafeRun(printWords)
+println("hello world")
 
 // yikes
 import Cause.*
@@ -26,15 +27,14 @@ def recoverFromSomeDefects[R, E, A](zio: ZIO[R, E, A])(
 
 def logFailures[R, E, A](zio: ZIO[R, E, A]): ZIO[R, E, A] =
   zio.foldCauseZIO(
-    c => ZIO.Succeed(c.prettyPrint) *> zio,
+    c => ZIO.SucceedNow(c.prettyPrint) *> zio,
     _ => zio
   )
 
 def ioException[R, A](
-              zio: ZIO[R, Throwable, A]
+    zio: ZIO[R, Throwable, A]
 ): ZIO[R, java.io.IOException, A] =
   zio.refineOrDie[IOException] { case e: IOException => e }
 
 val parseNumber: ZIO[Any, Throwable, Int] =
   ZIO.attempt("foo".toInt).refineToOrDie[java.lang.NumberFormatException]
-
